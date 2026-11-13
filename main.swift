@@ -13,7 +13,7 @@ func mood(rate: Double, idle: Double, anger: Double) -> Mood {
     if idle > 30 { return .sleeping }
     if rate < 0.5 { return .idle }
     if rate < 4 { return .walking }
-    if rate < 8 { return .running } // 8 tasti/s ≈ 95 parole al minuto
+    if rate < 6 { return .running } // 6 tasti/s ≈ 70 parole al minuto, tenuti per qualche secondo
     return .frantic
 }
 
@@ -759,8 +759,8 @@ MainActor.assumeIsolated {
         assert(mood(rate: 9, idle: 31, anger: 0) == .sleeping) // fermo da tanto: dorme anche se la media non è ancora scesa
         assert(mood(rate: 0, idle: 5, anger: 0) == .idle)
         assert(mood(rate: 3, idle: 0, anger: 0) == .walking)
-        assert(mood(rate: 6, idle: 0, anger: 0) == .running)
-        assert(mood(rate: 8, idle: 0, anger: 0) == .frantic)
+        assert(mood(rate: 5, idle: 0, anger: 0) == .running)
+        assert(mood(rate: 6, idle: 0, anger: 0) == .frantic)
         assert(mood(rate: 8, idle: 0, anger: 5) == .angry)
         assert(abs(smoothed(0, instant: 10, dt: 0.25) - 1) < 1e-9) // un decimo del tempo → un decimo della strada
         assert(smoothed(3, instant: 10, dt: 99) == 10) // mai oltre il valore istantaneo

@@ -33,8 +33,8 @@ L'umore dipende da quanti tasti premi al secondo, in media sugli ultimi secondi.
 | 💤 Dorme | nessun tasto da 30 secondi |
 | 🐾 Fermo | non stai scrivendo: scodinzola e sbatte gli occhi |
 | 🚶 Cammina | meno di 4 tasti al secondo |
-| 🏃 Corre | da 4 a 8 tasti al secondo |
-| 💦 Frenetico | più di 8 tasti al secondo (circa 95 parole al minuto) |
+| 🏃 Corre | da 4 a 6 tasti al secondo |
+| 💦 Frenetico | più di 6 tasti al secondo (circa 70 parole al minuto) |
 | 💢 Arrabbiato | circa 5 Backspace di fila, o Backspace tenuto premuto 2 secondi |
 | ❤️ Accarezzato | l'hai toccato |
 
