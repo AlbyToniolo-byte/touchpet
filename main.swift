@@ -430,6 +430,20 @@ func renderIcon(to path: String) {
     }
 }
 
+/// Mette il disegno su un tasto vero: così la Control Strip gli dà lo stesso sfondo grigio dei tasti di sistema
+/// (una vista semplice resta sul grigio più scuro della striscia). I tocchi restano alla vista.
+func systemKey(_ view: NSView) -> NSButton {
+    let key = NSButton(title: "", target: nil, action: nil)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    key.addSubview(view)
+    NSLayoutConstraint.activate([
+        key.widthAnchor.constraint(equalToConstant: 54), // larghezza dei tasti di sistema (luminosità, volume…)
+        view.leadingAnchor.constraint(equalTo: key.leadingAnchor), view.trailingAnchor.constraint(equalTo: key.trailingAnchor),
+        view.topAnchor.constraint(equalTo: key.topAnchor), view.bottomAnchor.constraint(equalTo: key.bottomAnchor),
+    ])
+    return key
+}
+
 // MARK: - App
 
 @MainActor final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -453,8 +467,7 @@ func renderIcon(to path: String) {
     func applicationDidFinishLaunching(_ note: Notification) {
         // 1. l'animale piccolo, sempre visibile nella Control Strip: toccarlo espande la barra
         let tray = NSCustomTouchBarItem(identifier: trayID)
-        tray.view = trayPet
-        trayPet.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        tray.view = systemKey(trayPet)
         trayPet.onTap = { [unowned self] in expand() }
         NSTouchBarItem.addSystemTrayItem(tray)
         DFRElementSetControlStripPresenceForIdentifier(trayID, true)
