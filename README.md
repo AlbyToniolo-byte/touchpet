@@ -40,7 +40,7 @@ L'umore dipende da quanti tasti premi al secondo, in media sugli ultimi secondi.
 
 ## Personalizzazione
 
-Quattro animali (gatto, cane, coniglio, papera), il colore del pelo che vuoi e quattro accessori: cilindro, corona, fiocco, fiore. Le scelte restano salvate.
+Otto animali (gatto, cane, coniglio, papera, elefante, coccodrillo, pinguino, tartaruga), il colore del pelo che vuoi e quattro accessori: cilindro, corona, fiocco, fiore. Le scelte restano salvate.
 
 ![Alcune combinazioni di animale, colore e accessorio](docs/aspetto.png)
 

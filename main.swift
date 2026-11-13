@@ -31,7 +31,7 @@ func angerAfter(_ anger: Double, pressed: Bool, held: Bool, dt: Double) -> Doubl
 
 // MARK: - Disegni (pixel art, l'animale guarda a destra)
 // '#' pelo, 'd' pelo scuro (zampe dietro, strisce), 'l' pelo chiaro (pancia, muso), 'o' occhio, '-' occhio chiuso,
-// 'p' rosa, 'a' arancione, 'k' grigio, 'r' rosso, 'y' giallo, 'g' verde, '.' vuoto
+// 'w' bianco, 'p' rosa, 'a' arancione, 'k' grigio, 'r' rosso, 'y' giallo, 'g' verde, '.' vuoto
 
 struct Species {
     let name: String
@@ -171,6 +171,114 @@ let speciesList = [
                     "..###########l....",
                     "...#########......"],
             hat: (13, 0), sleepHat: (12, 0), hop: 0),
+    Species(name: "Elefante", color: 0x9AA3B0,
+            top: [["............######....",
+                   "...##########dd####...",
+                   "..##########dddd#o##..",
+                   ".###########dddd######",
+                   "d###########dddd###.##",
+                   "d############dd###w.##"],
+                  ["............######....",
+                   "...###########d####...",
+                   "..###########ddd#o##..",
+                   ".############ddd######",
+                   "d############ddd###.##",
+                   "d############dd###w.##"]],
+            body: [".################ww.##",
+                   ".###############...##.",
+                   ".###############..##..",
+                   ".##lllllllllll##......"],
+            legs: [["..###.ddd.###ddd......",
+                    "..###.ddd.###ddd......",
+                    "..lll.ddd.lllddd......"],
+                   ["..###.ddd.ddd###......",
+                    ".###...dddddd..###....",
+                    ".lll...dddddd..lll...."],
+                   ["...###dd...d###.......",
+                    "...###d....d###.......",
+                    "...llld....dlll......."]],
+            sleep: ["............######....",
+                    "...##########dd####...",
+                    "..##########dddd#-##..",
+                    ".###########dddd######",
+                    "d###########dddd##ww##",
+                    "d##lllllllll#####..###"],
+            hat: (15, 0), sleepHat: (15, 0), hop: 0),
+    Species(name: "Coccodrillo", color: 0x5FA04E,
+            top: [["................##........",
+                   "..d.d.d.d.d.d..#o#########",
+                   "..########################"],
+                  ["................##........",
+                   "...d.d.d.d.d.d.#o#########",
+                   "..########################"]],
+            body: ["##################w#w#w#w.",
+                   ".####lllllllllll#########."],
+            legs: [["...##.dd......##.dd.......",
+                    "...ll.dd......ll.dd......."],
+                   ["..##...dd....dd...##......",
+                    "..ll...dd....dd...ll......"],
+                   ["....##d........d##........",
+                    "....lld........dll........"]],
+            sleep: ["................##........",
+                    "..d.d.d.d.d.d..#-#########",
+                    "##########################",
+                    ".####lllllllllll#########."],
+            hat: (17, 0), sleepHat: (17, 0), hop: 0),
+    Species(name: "Pinguino", color: 0x3F4C6B,
+            top: [["....#####.....",
+                   "...#######....",
+                   "...###wow#aa..",
+                   "...##wwww#a...",
+                   "...##wwww#...."],
+                  ["....#####.....",
+                   "...#######....",
+                   "...###wow#aa..",
+                   "...##wwww#....",
+                   "...##wwww#...."]],
+            body: ["..###wwwww#...",
+                   ".d###wwwww##..",
+                   ".d##wwwwww##..",
+                   ".d##wwwwww##..",
+                   "..##wwwwww##..",
+                   "...##wwww##..."],
+            legs: [["....aa..aa....",
+                    "...aaa.aaa...."],
+                   ["...aa....aa...",
+                    "..aaa...aaa..."],
+                   [".....aa.aa....",
+                    "....aaaaaa...."]],
+            sleep: ["....#####.....",
+                    "...#######....",
+                    "...###w-w#aa..",
+                    "..###wwww##...",
+                    ".d##wwwwww##..",
+                    ".d##wwwwww##..",
+                    "..##wwwwww##..",
+                    "...########..."],
+            hat: (6, 0), sleepHat: (6, 0), hop: 0),
+    Species(name: "Tartaruga", color: 0x7BC47A,
+            top: [["......dddddd........",
+                   "....dd#dd#dddd..###.",
+                   "...dd#dddd#dddd.#o##",
+                   "..dddddddddddddd####"],
+                  ["......dddddd........",
+                   "....dd#dd#dddd......",
+                   "...dd#dddd#dddd###..",
+                   "..dddddddddddddd#o#."]],
+            body: [".#llllllllllllll##..",
+                   "..llllllllllllll...."],
+            legs: [["...##.......##......",
+                    "...##.......##......"],
+                   ["..##.........##.....",
+                    "..##.........##....."],
+                   ["....##.....##.......",
+                    "....##.....##......."]],
+            sleep: ["......dddddd........",
+                    "....dd#dd#dddd......",
+                    "...dd#dddd#dddd.....",
+                    "..dddddddddddddd-#..",
+                    "..llllllllllllll...."],
+            hat: (17, 1), sleepHat: (9, 0), hop: 0),
 ]
 
 let accessories: [(name: String, rows: [String])] = [
@@ -217,7 +325,7 @@ func palette(_ fur: NSColor) -> [Character: NSColor] {
             "l": fur.blended(withFraction: 0.6, of: .white) ?? fur,
             "o": eye, "-": eye,
             "p": color(hex: 0xFF8FA8), "a": color(hex: 0xFF8A1F), "k": color(hex: 0x70707A),
-            "r": color(hex: 0xF0384A), "y": color(hex: 0xFFD21F), "g": color(hex: 0x4CC25A)]
+            "w": .white, "r": color(hex: 0xF0384A), "y": color(hex: 0xFFD21F), "g": color(hex: 0x4CC25A)]
 }
 
 func drawSprite(_ rows: [String], x: CGFloat, y: CGFloat, px: CGFloat, flipped: Bool, palette: [Character: NSColor]) {
@@ -570,8 +678,11 @@ func systemKey(_ view: NSView) -> NSButton {
         status.textColor = .secondaryLabelColor
         status.font = .monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
 
-        let animal = NSSegmentedControl(labels: speciesList.map(\.name), trackingMode: .selectOne, target: self, action: #selector(pickSpecies))
-        animal.selectedSegment = look.species
+        let animal = NSPopUpButton() // menu a tendina: otto nomi non stanno in una riga di tasti
+        animal.addItems(withTitles: speciesList.map(\.name))
+        animal.selectItem(at: look.species)
+        animal.target = self
+        animal.action = #selector(pickSpecies)
         well.color = look.color ?? color(hex: speciesList[look.species].color)
         well.target = self
         well.action = #selector(pickColor)
@@ -614,8 +725,8 @@ func systemKey(_ view: NSView) -> NSButton {
         return window
     }
 
-    @objc func pickSpecies(_ sender: NSSegmentedControl) {
-        look.species = sender.selectedSegment
+    @objc func pickSpecies(_ sender: NSPopUpButton) {
+        look.species = sender.indexOfSelectedItem
         look.save()
         if look.color == nil { well.color = color(hex: speciesList[look.species].color) }
     }

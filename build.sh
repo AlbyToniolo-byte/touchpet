@@ -35,7 +35,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
   <key>CFBundleIdentifier</key><string>local.touchpet</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>1.0.2</string>
+  <key>CFBundleShortVersionString</key><string>1.1</string>
   <key>LSMinimumSystemVersion</key><string>13.0</string>
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
@@ -47,7 +47,7 @@ codesign --force --sign - "$APP" # firma locale: necessaria sui Mac Apple Silico
 rm -rf "$TMP"
 
 if [ "$1" = "install" ]; then # l'avvio all'accesso punta a questa copia: deve stare in un posto fisso
-  pkill -x TouchPet || true
+  pkill -x TouchPet && sleep 1 || true # un attimo di pausa: riaprirla subito dopo la chiusura a volte fallisce
   rm -rf "/Applications/$APP"
   ditto "$APP" "/Applications/$APP"
   open "/Applications/$APP"
