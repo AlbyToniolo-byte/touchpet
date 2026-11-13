@@ -326,9 +326,10 @@ final class PetView: NSView {
         if moving, step == 0 { oy += CGFloat(sp.hop + (mood == .walking ? 0 : 1)) * px } // saltella sul passo aperto
         if petted { oy += CGFloat(abs(sin(time * 9))) * 2 * px } // salta di gioia
         if mood == .angry, !petted { ox += (Int(time * 16) % 2 == 0 ? px : -px) / 3 } // trema
-        // arrotondati al mezzo punto (= un pixel vero): fuori griglia i quadratini sfumano e compaiono righe
-        ox = (ox * 2).rounded() / 2
-        oy = (oy * 2).rounded() / 2
+        // arrotondati al pixel vero dello schermo (mezzo punto sui Retina): fuori griglia i quadratini sfumano e compaiono righe
+        let scale = window?.backingScaleFactor ?? 2
+        ox = (ox * scale).rounded() / scale
+        oy = (oy * scale).rounded() / scale
 
         let flipped = dir < 0
         drawSprite(rows, x: ox, y: oy, px: px, flipped: flipped, palette: pal)

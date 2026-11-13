@@ -11,7 +11,11 @@ swiftc main.swift $FLAGS -o "$TMP/selftest" && "$TMP/selftest" --selftest # buil
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-swiftc -O main.swift $FLAGS -o "$APP/Contents/MacOS/TouchPet"
+# app universale (Apple Silicon + Intel) da macOS 13: gira su tutti i MacBook Pro con Touch Bar
+for arch in arm64 x86_64; do
+  swiftc -O -target $arch-apple-macos13 main.swift $FLAGS -o "$TMP/TouchPet-$arch"
+done
+lipo -create "$TMP/TouchPet-arm64" "$TMP/TouchPet-x86_64" -output "$APP/Contents/MacOS/TouchPet"
 
 # icona: l'app disegna un PNG 1024x1024, poi lo riduciamo a tutte le misure richieste da macOS
 mkdir "$TMP/AppIcon.iconset"
@@ -31,7 +35,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
   <key>CFBundleIdentifier</key><string>local.touchpet</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>0.2</string>
+  <key>CFBundleShortVersionString</key><string>1.0</string>
   <key>LSMinimumSystemVersion</key><string>13.0</string>
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
