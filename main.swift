@@ -529,8 +529,12 @@ func systemKey(_ view: NSView) -> NSButton {
         let m = mood(rate: rate, idle: idle, anger: anger)
 
         // la parte libera della barra cambia (es. Control Strip aperta o chiusa): la riga la segue
+        // Solo a barra espansa: finché la vista non è sullo schermo visibleRect è "infinito", e un valore così
+        // rompeva la disposizione (i tasti non comparivano più espandendo dall'icona).
         let visible = barArea.visibleRect.width
-        if visible > 0, visible != visibleWidth.constant { visibleWidth.constant = visible }
+        if barArea.window != nil, visible > 0, visible <= barArea.bounds.width, visible != visibleWidth.constant {
+            visibleWidth.constant = visible
+        }
 
         let pets = [trayPet, barPet, bigPet]
         // da fermo o addormentato bastano 5 disegni al secondo invece di 30: è sempre acceso, deve consumare poco
